@@ -9,7 +9,7 @@ class PeyoteAllowOriginMiddleware(object):
             origin = request.META.get('HTTP_ORIGIN')
             origin_regex = getattr(settings, 'PEYOTE_ALLOW_ORIGIN', None)
             if origin_regex and re.match(origin_regex, origin):
-                response['Access-Control-Allow-Headers'] = 'Content-Type'
+                response['Access-Control-Allow-Headers'] = 'Accept,Origin,Content-Type'
                 response['Access-Control-Allow-Methods'] = 'POST,GET,OPTIONS,PUT'
                 response['Access-Control-Allow-Origin'] = origin
             else:
@@ -21,6 +21,7 @@ class PeyoteAllowOriginMiddleware(object):
         if response.has_header('Access-Control-Allow-Origin'):
             return response
         origin = request.META.get('HTTP_ORIGIN')
-        response['Access-Control-Allow-Headers'] = 'Content-Type'
+        response['Access-Control-Allow-Headers'] = 'Accept,Origin,Content-Type'
         response['Access-Control-Allow-Methods'] = 'POST,GET,OPTIONS,PUT'
         response['Access-Control-Allow-Origin'] = origin
+        return response
