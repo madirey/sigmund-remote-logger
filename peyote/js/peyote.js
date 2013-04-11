@@ -16,7 +16,7 @@ function peyote(endpointUrl) {
 
         $.ajax({
             type: 'POST',
-            url: "http://localhost:8000/api/v1/peyote/",
+            url: endpointUrl,
             crossDomain: true,
             data: jsonStr,
             processData: false,
