@@ -12,4 +12,4 @@ installation
 4. If cross-domain support is required:
    - Add PEYOTE_ALLOW_ORIGIN=<regex> to settings.py
    - Add peyote.middleware.PeyoteAllowOriginMiddleware
-     to installed middlware
+     to installed middleware
