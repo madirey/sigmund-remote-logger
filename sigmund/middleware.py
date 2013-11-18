@@ -2,12 +2,12 @@ import re
 from django import http
 from django.conf import settings
 
-class PeyoteAllowOriginMiddleware(object):
+class SigmundAllowOriginMiddleware(object):
     def process_request(self, request):
         if 'HTTP_ACCESS_CONTROL_REQUEST_METHOD' in request.META:
             response = http.HttpResponse()
             origin = request.META.get('HTTP_ORIGIN')
-            origin_regex = getattr(settings, 'PEYOTE_ALLOW_ORIGIN', None)
+            origin_regex = getattr(settings, 'SIGMUND_ALLOW_ORIGIN', None)
             if origin_regex and re.match(origin_regex, origin):
                 response['Access-Control-Allow-Headers'] = 'Accept,Origin,Content-Type'
                 response['Access-Control-Allow-Methods'] = 'POST,GET,OPTIONS,PUT'

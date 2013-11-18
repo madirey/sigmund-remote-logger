@@ -4,7 +4,7 @@ from tastypie.authorization import Authorization
 from tastypie.resources import ModelResource
 from tastypie.serializers import Serializer
 
-class PeyoteResource(ModelResource):
+class SigmundResource(ModelResource):
     class Meta:
         queryset = LogEntry.objects.all()
         authentication = Authentication()

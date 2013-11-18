@@ -4,7 +4,7 @@
 // Depends on: jquery
 //
 // -------------
-function peyote(endpointUrl) {
+function sigmund(endpointUrl) {
     window.onerror = function(msg, url, line) {
         var jsonStr = '{"message":"'+msg+'","level":"ERROR","filename":"'+url+'"';
 
