@@ -20,13 +20,13 @@ class SigmundHandler(Handler):
                                )
 
         params = {
-            'message': record.message,
+            'message': self.format(record),
             'level': record.levelname,
             'filename': record.filename,
             'line': record.lineno,
             'user_agent': '',
             'ip_address': '',
-            'timestamp': record.asctime,
+            'timestamp': record.created,
         }
 
         requests.post(url, params)
