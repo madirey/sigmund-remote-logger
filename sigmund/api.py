@@ -1,5 +1,5 @@
 from models import LogEntry
-from tastypie.authentication import Authentication
+from tastypie.authentication import ApiKeyAuthentication
 from tastypie.authorization import Authorization
 from tastypie.resources import ModelResource
 from tastypie.serializers import Serializer
@@ -7,7 +7,7 @@ from tastypie.serializers import Serializer
 class SigmundResource(ModelResource):
     class Meta:
         queryset = LogEntry.objects.all()
-        authentication = Authentication()
+        authentication = ApiKeyAuthentication()
         authorization = Authorization()
         serializer = Serializer(formats=['json', 'jsonp'])
 
