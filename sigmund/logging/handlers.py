@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.conf import settings
 from logging import Handler
 import json, requests, urlparse
@@ -22,15 +23,17 @@ class SigmundHandler(Handler):
             'Content-Type': 'application/json',
         }
 
+        try:
+            timestamp = datetime.utcfromtimestamp(record.created).isoformat()
+        except:
+            timestamp = ''
+
         params = {
             'message': self.format(record),
             'level': record.levelname,
             'filename': record.filename,
             'line': record.lineno,
-            'timestamp': record.created,
+            'timestamp': timestamp,
         }
 
         requests.post(url, json.dumps(params), headers=headers)
-
-if __name__ == '__main__':
-    print SigmundHandler()
