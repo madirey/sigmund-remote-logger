@@ -13,11 +13,13 @@ class SigmundHandler(Handler):
                        settings, 'SIGMUND_API_KEY'):
             return
 
-        url = urlparse.urljoin(settings.SIGMUND_URL,
-                               '/api/v1/sigmund/?username=%s&api_key=%s' % (
-                                    settings.SIGMUND_USERNAME,
-                                    settings.SIGMUND_API_KEY)
-                               )
+        url = urlparse.urljoin(settings.SIGMUND_URL, '/api/v1/sigmund/')
+
+        headers = {
+            'Authorization': 'ApiKey {username}:{api_key}'.format(
+                username=settings.SIGMUND_USERNAME,
+                api_key=settings.SIGMUND_API_KEY),
+        }
 
         params = {
             'message': self.format(record),
@@ -29,7 +31,7 @@ class SigmundHandler(Handler):
             'timestamp': record.created,
         }
 
-        requests.post(url, params)
+        requests.post(url, params, headers=headers)
 
 if __name__ == '__main__':
     print SigmundHandler()
