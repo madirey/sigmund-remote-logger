@@ -3,10 +3,10 @@
 from distutils.core import setup
 
 setup(name='sigmund-remote-logger',
-      version='0.3',
+      version='0.6',
       description='Sigmund is a remote logging service for Django.',
       author='Matt Caldwell',
       author_email='matt.caldwell@gmail.com',
       url='https://github.com/mattcaldwell/sigmund-remote-logger',
-      packages=['sigmund']
+      packages=['sigmund', 'sigmund.logging',]
 )
