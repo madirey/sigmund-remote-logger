@@ -1,6 +1,6 @@
 from django.conf import settings
 from logging import Handler
-import requests, urlparse
+import json, requests, urlparse
 
 class SigmundHandler(Handler):
 
@@ -19,6 +19,7 @@ class SigmundHandler(Handler):
             'Authorization': 'ApiKey {username}:{api_key}'.format(
                 username=settings.SIGMUND_USERNAME,
                 api_key=settings.SIGMUND_API_KEY),
+            'Content-Type': 'application/json',
         }
 
         params = {
@@ -26,12 +27,10 @@ class SigmundHandler(Handler):
             'level': record.levelname,
             'filename': record.filename,
             'line': record.lineno,
-            'user_agent': '',
-            'ip_address': '',
             'timestamp': record.created,
         }
 
-        requests.post(url, params, headers=headers)
+        requests.post(url, json.dumps(params), headers=headers)
 
 if __name__ == '__main__':
     print SigmundHandler()
